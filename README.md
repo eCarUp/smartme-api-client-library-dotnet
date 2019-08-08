@@ -9,12 +9,3 @@ See the Example project in [`Src/Example`](Src/Example). You need a smart-me log
 ## Requirements
 
 .Net Framework 4.7.2+
-
-
-
-
-
-
-
-- [Documentation](https://www.newtonsoft.com/json/help)
-- [NuGet Package](https://www.nuget.org/packages/Newtonsoft.Json)
