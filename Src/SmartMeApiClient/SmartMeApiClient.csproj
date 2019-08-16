@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.abstractions\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -58,6 +61,7 @@
     <Compile Include="Containers\SmartMeDeviceConfiguration.cs" />
     <Compile Include="Containers\SwitchConfiguration.cs" />
     <Compile Include="Containers\User.cs" />
+    <Compile Include="Converters\GuidConverter.cs" />
     <Compile Include="Enumerations\ActionType.cs" />
     <Compile Include="Enumerations\DigitalInputType.cs" />
     <Compile Include="Enumerations\DigitalOutputNoConnectionAction.cs" />

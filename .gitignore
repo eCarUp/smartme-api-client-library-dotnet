@@ -6,3 +6,6 @@ Src/packages/
 .vs/
 Src/SmartMeApiClient/bin/
 Src/SmartMeApiClient/obj/
+Src/OAuthWebExample/bin/
+Src/OAuthWebExample/obj/
+*.user

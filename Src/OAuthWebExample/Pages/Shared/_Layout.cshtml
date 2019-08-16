@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - OAuthWebExample</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">                
+                <a href="/Index" class="navbar-left"><img src="~/images/logo.png" alt="smart-me" /></a>
+                <a asp-page="/Index" class="navbar-brand" style="margin-left:2px;">OAuthWebExample</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Devices <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a asp-page="/devices/getdevices">Get all Devices</a></li>
+                            <li><a asp-page="/devices/getdeviceswithenergytype">Get Devices with Energy Type</a></li>
+                            <li><a asp-page="/devices/getdeviceswithsubtype">Get Devices with Meter Sub Type</a></li>
+                            <li><a asp-page="/devices/getdevicebyid">Get Device by Id</a></li>
+                            <li><a asp-page="/devices/getdevicebyserial">Get Device by Serial</a></li>
+                            <li><a asp-page="/devices/getadditionaldeviceinformation">Get Additional Device Information</a></li>
+                            <li class="divider"></li>
+                            <li><a asp-page="/devices/adddevice">Add a New Device</a></li>
+                            <li><a asp-page="/devices/updatedevice">Update a Device</a></li>
+                            <li class="divider"></li>
+                            <li><a asp-page="/devices/getsmartmedeviceconfiguration">Get SmartMeDeviceConfiguration</a></li>
+                            <li><a asp-page="/devices/setsmartmedeviceconfiguration">Set SmartMeDeviceConfiguration</a></li>
+                            <li class="divider"></li>
+                            <li><a asp-page="/devices/addcustomdevice">Add Custom Device</a></li>
+                            <li><a asp-page="/devices/updatecustomdevice">Update Custom Device</a></li>
+                            <li><a asp-page="/devices/getcustomdevices">Get Custom Devices</a></li>
+                            <li><a asp-page="/devices/getcustomdevicebyid">Get Custom Device by Id</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Folder <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a asp-page="/folder/getfolder">Get Folder by Id</a></li>
+                            <li><a asp-page="/folder/getmeterfolderinformation">Get MeterFolderInformation</a></li>
+                            <li><a asp-page="/folder/setmeterfolderinformation">Set MeterFolderInformation</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a asp-page="/user/getuser">Get User</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Values <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a asp-page="/values/getvalues">Get Values</a></li>
+                            <li><a asp-page="/values/getvaluesinpast">Get Values In Past</a></li>
+                            <li><a asp-page="/values/getvaluesinpastmultiple">Get Values In Past Multiple</a></li>
+                            <li><a asp-page="/values/getmetervalues">Get Meter Values</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a asp-page="/actions/getactions">Get Actions</a></li>
+                            <li><a asp-page="/actions/runactions">Run Actions</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">MBus <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a asp-page="/mbus/sendtelegram">Send Telegram</a></li>
+                        </ul>
+                    </li>
+
+                    <li style="margin-left:20px;">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Account" asp-action="Logout" class="btn btn-default">Logout</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-default">Login</a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content" style="margin-top:20px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>smart-me &copy; 2019 - OAuthWebExample</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

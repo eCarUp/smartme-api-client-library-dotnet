@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2019 smart-me AG https://web.smart-me.com/
+// Copyright (c) 2019 smart-me AG https://www.smart-me.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SmartMeApiClient
 {
@@ -39,7 +40,7 @@ namespace SmartMeApiClient
         /// <summary>
         /// Gets the available Folders or Meters
         /// </summary>
-        /// <param name="usernamePassword">The Username and Password</param>
+        /// <param name="usernamePassword">The Username and Password for Basic Authentication</param>
         /// <param name="id">The ID of the Folder or Meter</param>
         /// <returns></returns>
         public static async Task<Folder> GetFolderAsync(UserPassword usernamePassword, Guid id)
@@ -51,9 +52,41 @@ namespace SmartMeApiClient
         }
 
         /// <summary>
+        /// Gets the available Folders or Meters
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="id">The ID of the Folder or Meter</param>
+        /// <returns></returns>
+        public static async Task<Folder> GetFolderAsync(string accessToken, Guid id)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.GetAsync<Folder>("Folder/" + id);
+            }
+        }
+
+        /// <summary>
+        /// Gets the available Folders or Meters
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="id">The ID of the Folder or Meter</param>
+        /// <param name="resultHandler">The result handler</param>
+        /// <returns></returns>
+        public static async Task<IActionResult> GetFolderAsync(
+            string accessToken, 
+            Guid id, 
+            ResultHandler<Folder> resultHandler)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.GetAsync<Folder>("Folder/" + id, resultHandler);
+            }
+        }
+
+        /// <summary>
         /// Gets the Information of a Folder or a Meter
         /// </summary>
-        /// <param name="usernamePassword">The Username and Password</param>
+        /// <param name="usernamePassword">The Username and Password for Basic Authentication</param>
         /// <param name="id">The ID of the Folder or Meter</param>
         /// <returns></returns>
         public static async Task<MeterFolderInformation> GetMeterFolderInformationAsync(UserPassword usernamePassword, Guid id)
@@ -65,9 +98,41 @@ namespace SmartMeApiClient
         }
 
         /// <summary>
+        /// Gets the Information of a Folder or a Meter
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="id">The ID of the Folder or Meter</param>
+        /// <returns></returns>
+        public static async Task<MeterFolderInformation> GetMeterFolderInformationAsync(string accessToken, Guid id)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.GetAsync<MeterFolderInformation>("MeterFolderInformation/" + id);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Information of a Folder or a Meter
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="id">The ID of the Folder or Meter</param>
+        /// <param name="resultHandler">The result handler</param>
+        /// <returns></returns>
+        public static async Task<IActionResult> GetMeterFolderInformationAsync(
+            string accessToken, 
+            Guid id, 
+            ResultHandler<MeterFolderInformation> resultHandler)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.GetAsync<MeterFolderInformation>("MeterFolderInformation/" + id, resultHandler);
+            }
+        }
+
+        /// <summary>
         /// Sets the Name of a Meter or a Folder
         /// </summary>
-        /// <param name="usernamePassword">The Username and Password</param>
+        /// <param name="usernamePassword">The Username and Password for Basic Authentication</param>
         /// <param name="meterFolderInformation">The Id of the meter or folder and the Name to be set</param>
         /// <returns></returns>
         public static async Task<bool> SetMeterFolderInformationAsync(UserPassword usernamePassword, MeterFolderInformationToSet meterFolderInformation)
@@ -75,6 +140,38 @@ namespace SmartMeApiClient
             using (var restApi = new SmartMeApiClient(usernamePassword))
             {
                 return await restApi.PostAsync<MeterFolderInformationToSet>("MeterFolderInformation", meterFolderInformation);
+            }
+        }
+
+        /// <summary>
+        /// Sets the Name of a Meter or a Folder
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="meterFolderInformation">The Id of the meter or folder and the Name to be set</param>
+        /// <returns></returns>
+        public static async Task<bool> SetMeterFolderInformationAsync(string accessToken, MeterFolderInformationToSet meterFolderInformation)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.PostAsync<MeterFolderInformationToSet>("MeterFolderInformation", meterFolderInformation);
+            }
+        }
+
+        /// <summary>
+        /// Sets the Name of a Meter or a Folder
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="meterFolderInformation">The Id of the meter or folder and the Name to be set</param>
+        /// <param name="resultHandler">The result handler</param>
+        /// <returns></returns>
+        public static async Task<IActionResult> SetMeterFolderInformationAsync(
+            string accessToken, 
+            MeterFolderInformationToSet meterFolderInformation, 
+            ResultHandler<MeterFolderInformationToSet> resultHandler)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.PostAsync<MeterFolderInformationToSet>("MeterFolderInformation", meterFolderInformation, resultHandler);
             }
         }
     }

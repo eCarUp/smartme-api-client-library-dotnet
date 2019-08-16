@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2019 smart-me AG https://web.smart-me.com/
+// Copyright (c) 2019 smart-me AG https://www.smart-me.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get Values");
 
-                var deviceValues = await ValuesApi.GetDeviceValuesAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                var deviceValues = await ValuesApi.GetDeviceValuesAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
 
                 foreach (var deviceValue in deviceValues.Values)
                 {
@@ -52,7 +52,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get Values In Past");
 
-                var deviceValues = await ValuesApi.GetDeviceValuesInPastAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"), new DateTime(2019, 8, 5, 12, 0, 0, DateTimeKind.Utc));
+                var deviceValues = await ValuesApi.GetDeviceValuesInPastAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"), new DateTime(2019, 8, 16, 12, 0, 0, DateTimeKind.Utc));
 
                 foreach (var deviceValue in deviceValues.Values)
                 {
@@ -66,7 +66,7 @@ namespace Example
 
                 var multipleDeviceValues = await ValuesApi.GetDeviceValuesInPastMultipleAsync(
                     credentials,
-                    new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"),
+                    new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"),
                     new DateTime(2019, 8, 5, 10, 0, 0, DateTimeKind.Utc),
                     new DateTime(2019, 8, 5, 12, 0, 0, DateTimeKind.Utc),
                     5);
@@ -86,7 +86,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get Meter Values");
 
-                var meterValues = await ValuesApi.GetMeterValuesAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"), new DateTime(2019, 8, 5, 12, 0, 0, DateTimeKind.Utc));
+                var meterValues = await ValuesApi.GetMeterValuesAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"), new DateTime(2019, 8, 5, 12, 0, 0, DateTimeKind.Utc));
 
                 Console.WriteLine($"CounterReading: {meterValues.CounterReading}, CounterReadingImport: {meterValues.CounterReadingImport}");
             }

@@ -1,0 +1,22 @@
+﻿@page
+@model OAuthWebExample.Pages.Actions.RunActionsModel
+@{
+    ViewData["Title"] = "Actions";
+}
+
+<h2>Run Actions</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (User.Identity.IsAuthenticated)
+        {
+        <form method="post">
+            <button type="submit" class="btn btn-default" asp-page-handler="SwitchOn">Switch On</button>
+        </form>
+
+        <form method="post">
+            <button type="submit" class="btn btn-default" asp-page-handler="SwitchOff">Switch Off</button>
+        </form>
+        }
+    </div>
+</div>

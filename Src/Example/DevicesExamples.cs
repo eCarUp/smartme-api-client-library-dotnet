@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2019 smart-me AG https://web.smart-me.com/
+// Copyright (c) 2019 smart-me AG https://www.smart-me.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -50,9 +50,9 @@ namespace Example
 
             // Get all devices with a certain energy type 
             {
-                Helpers.WriteConsoleTitle("Get all devices with energy type 'MeterTypeAllMeters'");
+                Helpers.WriteConsoleTitle("Get all devices with energy type 'MeterTypeElectricity'");
 
-                List<Device> devices = await DevicesApi.GetDevicesAsync(credentials, MeterEnergyType.MeterTypeAllMeters);
+                List<Device> devices = await DevicesApi.GetDevicesAsync(credentials, MeterEnergyType.MeterTypeElectricity);
 
                 foreach (var device in devices)
                 {
@@ -62,9 +62,9 @@ namespace Example
 
             // Get all devices with a certain meter sub type
             {
-                Helpers.WriteConsoleTitle("Get all devices with meter sub type 'MeterSubTypeElectricity'");
+                Helpers.WriteConsoleTitle("Get all devices with meter sub type 'MeterSubTypeHeat'");
 
-                List<Device> devices = await DevicesApi.GetDevicesAsync(credentials, MeterSubType.MeterSubTypeElectricity);
+                List<Device> devices = await DevicesApi.GetDevicesAsync(credentials, MeterSubType.MeterSubTypeHeat);
 
                 foreach (var device in devices)
                 {
@@ -83,7 +83,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get device by Id");
 
-                Device device = await DevicesApi.GetDeviceAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                Device device = await DevicesApi.GetDeviceAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
                 Console.WriteLine($"Name: {device.Name}, Id: {device.Id}");
             }
 
@@ -99,7 +99,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get additional device information");
 
-                var info = await DevicesApi.GetAdditionalDeviceInformationAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                var info = await DevicesApi.GetAdditionalDeviceInformationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
                 Console.WriteLine($"ID: {info.ID}, HardwareVersion: {info.HardwareVersion}, FirmwareVersion: {info.FirmwareVersion}, AdditionalMeterSerialNumber: {info.AdditionalMeterSerialNumber}");
             }
 
@@ -147,7 +147,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get smart-me device configuration");
 
-                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
                 Console.WriteLine($"Id: {configuration.Id}, UploadInterval: {configuration.UploadInterval}");
             }
 
@@ -155,21 +155,35 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Set smart-me device configuration");
 
-                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
 
                 configuration.SwitchConfiguration[0].CanSwitchOff = false;
 
-                await DevicesApi.SetSmartMeDeviceConfigurationAsync(credentials, configuration);
+                try
+                {
+                    await DevicesApi.SetSmartMeDeviceConfigurationAsync(credentials, configuration);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine($"Error: {e.Message}");
+                }
 
                 Console.WriteLine("Device is not allowed to switch off");
 
                 Thread.Sleep(5000);
 
-                configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
 
                 configuration.SwitchConfiguration[0].CanSwitchOff = true;
 
-                await DevicesApi.SetSmartMeDeviceConfigurationAsync(credentials, configuration);
+                try
+                {
+                    await DevicesApi.SetSmartMeDeviceConfigurationAsync(credentials, configuration);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error: {e.Message}");
+                }
 
                 Console.WriteLine("Device is allowed to switch off");
 
@@ -205,7 +219,27 @@ namespace Example
 
                 foreach (CustomDevice customDevice in customDevices)
                 {
-                    Console.WriteLine($"Id: {customDevice.Id}, Name: {customDevice.Name}");
+                    if (customDevice != null)
+                    {
+                        Console.WriteLine($"Id: {customDevice.Id}, Name: {customDevice.Name}");
+                    }
+                }
+            }
+
+            // Update Custom Device
+            {
+                Helpers.WriteConsoleTitle("Update a custom device");
+
+                List<CustomDevice> customDevices = await DevicesApi.GetCustomDevicesAsync(credentials);
+
+                foreach (CustomDevice customDevice in customDevices)
+                {
+                    if (customDevice != null)
+                    {
+                        customDevice.Name = "UpdatedCustomDeviceTest";
+                        await DevicesApi.UpdateCustomDeviceAsync(credentials, customDevice);
+                        break;
+                    }
                 }
             }
 

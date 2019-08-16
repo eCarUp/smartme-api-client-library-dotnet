@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2019 smart-me AG https://web.smart-me.com/
+// Copyright (c) 2019 smart-me AG https://www.smart-me.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SmartMeApiClient
 {
@@ -39,7 +40,7 @@ namespace SmartMeApiClient
         /// <summary>
         /// Gets all available Actions for a Device
         /// </summary>
-        /// <param name="usernamePassword">The Username and Password</param>
+        /// <param name="usernamePassword">The Username and Password for Basic Authentication</param>
         /// <param name="deviceId">The ID of the device</param>
         /// <returns></returns>
         public static async Task<List<Containers.Action>> GetActionsAsync(UserPassword usernamePassword, Guid deviceId)
@@ -51,9 +52,41 @@ namespace SmartMeApiClient
         }
 
         /// <summary>
+        /// Gets all available Actions for a Device
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="deviceId">The ID of the device</param>
+        /// <returns></returns>
+        public static async Task<List<Containers.Action>> GetActionsAsync(string accessToken, Guid deviceId)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.GetAsync<List<Containers.Action>>("Actions/" + deviceId);
+            }
+        }
+
+        /// <summary>
+        /// Gets all available Actions for a Device
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="deviceId">The ID of the device</param>
+        /// <param name="resultHandler">The result handler</param>
+        /// <returns></returns>
+        public static async Task<IActionResult> GetActionsAsync(
+            string accessToken, 
+            Guid deviceId, 
+            ResultHandler<List<Containers.Action>> resultHandler)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.GetAsync<List<Containers.Action>>("Actions/" + deviceId, resultHandler);
+            }
+        }
+
+        /// <summary>
         /// Runs an action for the specified device
         /// </summary>
-        /// <param name="usernamePassword">The Username and Password</param>
+        /// <param name="usernamePassword">The Username and Password for Basic Authentication</param>
         /// <param name="actionToRun">The Action Data</param>
         /// <returns></returns>
         public static async Task<bool> RunActionsAsync(UserPassword usernamePassword, Containers.ActionToRun actionToRun)
@@ -61,6 +94,38 @@ namespace SmartMeApiClient
             using (var restApi = new SmartMeApiClient(usernamePassword))
             {
                 return await restApi.PostAsync<Containers.ActionToRun>("Actions", actionToRun);
+            }
+        }
+
+        /// <summary>
+        /// Runs an action for the specified device
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="actionToRun">The Action Data</param>
+        /// <returns></returns>
+        public static async Task<bool> RunActionsAsync(string accessToken, Containers.ActionToRun actionToRun)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.PostAsync<Containers.ActionToRun>("Actions", actionToRun);
+            }
+        }
+
+        /// <summary>
+        /// Runs an action for the specified device
+        /// </summary>
+        /// <param name="accessToken">The OAuth2 access token</param>
+        /// <param name="actionToRun">The Action Data</param>
+        /// <param name="resultHandler">The result handler</param>
+        /// <returns></returns>
+        public static async Task<IActionResult> RunActionsAsync(
+            string accessToken, 
+            Containers.ActionToRun actionToRun, 
+            ResultHandler<ActionToRun> resultHandler)
+        {
+            using (var restApi = new SmartMeApiClient(accessToken))
+            {
+                return await restApi.PostAsync<Containers.ActionToRun>("Actions", actionToRun, resultHandler);
             }
         }
     }

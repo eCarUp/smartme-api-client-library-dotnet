@@ -1,0 +1,62 @@
+﻿@page
+@model OAuthWebExample.Pages.Devices.UpdateDeviceModel
+@{
+    ViewData["Title"] = "Devices";
+}
+
+<h2>Update Device</h2>
+<p>Check updated device values in your smart-me.com account.</p>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (User.Identity.IsAuthenticated)
+        {
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Device.Id"></label>
+                <input type="text" class="form-control" asp-for="Device.Id" value="@Model.Device.Id" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="Device.Name"></label>
+                <input type="text" class="form-control" asp-for="Device.Name" value="@Model.Device.Name">
+            </div>
+            <div class="form-group">
+                <label asp-for="Device.DeviceEnergyType"></label>
+                <select asp-for="Device.DeviceEnergyType" value="@Model.Device.DeviceEnergyType" disabled>
+                    <option value="0">Unknown</option>
+                    <option value="1">Electricity</option>
+                    <option value="2">Water</option>
+                    <option value="3">Gas</option>
+                    <option value="4">Heat</option>
+                    <option value="5">HCA</option>
+                    <option value="6">All Meters</option>
+                    <option value="7">Temperature</option>
+                    <option value="8">M-BUS Gateway</option>
+                    <option value="9">RS-485 Gateway</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Device.ActivePower"></label>
+                <input type="text" class="form-control" asp-for="Device.ActivePower" value="@Model.Device.ActivePower">
+            </div>
+            <div class="form-group">
+                <label asp-for="Device.CounterReading"></label>
+                <input type="text" class="form-control" asp-for="Device.CounterReading" value="@Model.Device.CounterReading">
+            </div>
+            <div class="form-group">
+                <label asp-for="Device.Voltage"></label>
+                <input type="text" class="form-control" asp-for="Device.Voltage" value="@Model.Device.Voltage">
+            </div>
+            <div class="form-group">
+                <label asp-for="Device.Current"></label>
+                <input type="text" class="form-control" asp-for="Device.Current" value="@Model.Device.Current">
+            </div>
+            <div class="form-group">
+                <label asp-for="Device.Temperature"></label>
+                <input type="text" class="form-control" asp-for="Device.Temperature" value="@Model.Device.Temperature">
+            </div>
+            <button type="submit" class="btn btn-default">Update</button>
+        </form>
+        }
+    </div>
+</div>

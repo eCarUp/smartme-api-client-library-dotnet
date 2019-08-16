@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2019 smart-me AG https://web.smart-me.com/
+// Copyright (c) 2019 smart-me AG https://www.smart-me.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get Folder");
 
-                var folder = await FolderApi.GetFolderAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                var folder = await FolderApi.GetFolderAsync(credentials, new Guid("686e51c1-2df8-4596-88aa-113f9022474a"));
 
                 Console.WriteLine($"ElectricityCounterValue: {folder.ElectricityCounterValue}, ElectricityPower: {folder.ElectricityPower}");
             }
@@ -49,7 +49,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get MeterFolderInformation");
 
-                var info = await FolderApi.GetMeterFolderInformationAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                var info = await FolderApi.GetMeterFolderInformationAsync(credentials, new Guid("d9cc91af-58a1-48ed-9342-4aaf974074f2"));
 
                 Console.WriteLine($"Name: {info.Name}, IsFolder: {info.IsFolder}");
             }
@@ -60,7 +60,7 @@ namespace Example
 
                 await FolderApi.SetMeterFolderInformationAsync(credentials, new MeterFolderInformationToSet
                 {
-                    Id = new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"),
+                    Id = new Guid("d9cc91af-58a1-48ed-9342-4aaf974074f2"),
                     Name = "Test"
                 });
             }

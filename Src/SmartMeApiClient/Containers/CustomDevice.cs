@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2019 smart-me AG https://web.smart-me.com/
+// Copyright (c) 2019 smart-me AG https://www.smart-me.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SmartMeApiClient.Converters;
 using SmartMeApiClient.Enumerations;
 
 namespace SmartMeApiClient.Containers
@@ -39,6 +40,7 @@ namespace SmartMeApiClient.Containers
         /// The ID of the device
         /// </summary>
         /// <remarks>The ID of the device</remarks>
+        [JsonConverter(typeof(GuidConverter))]
         public Guid Id { get; set; }
 
         /// <summary>

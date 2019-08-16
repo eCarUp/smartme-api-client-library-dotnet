@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Example")]
-[assembly: AssemblyCopyright("Copyright © 2019 smart-me AG https://web.smart-me.com/")]
+[assembly: AssemblyCopyright("Copyright © 2019 smart-me AG https://www.smart-me.com/")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

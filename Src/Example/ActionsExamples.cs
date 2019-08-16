@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2019 smart-me AG https://web.smart-me.com/
+// Copyright (c) 2019 smart-me AG https://www.smart-me.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get Actions");
 
-                List<SmartMeApiClient.Containers.Action> actions = await ActionsApi.GetActionsAsync(credentials, new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"));
+                List<SmartMeApiClient.Containers.Action> actions = await ActionsApi.GetActionsAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
 
                 foreach (var action in actions)
                 {
@@ -55,7 +55,7 @@ namespace Example
 
                 await ActionsApi.RunActionsAsync(credentials, new SmartMeApiClient.Containers.ActionToRun
                 {
-                    DeviceID = new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"),
+                    DeviceID = new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"),
                     Actions = new List<SmartMeApiClient.Containers.ActionToRunItem>
                     {
                         new SmartMeApiClient.Containers.ActionToRunItem(HexStringHelper.ByteArrayToString(ObisCodes.SmartMeSpecificPhaseSwitchL1), 1.0)
@@ -68,7 +68,7 @@ namespace Example
 
                 await ActionsApi.RunActionsAsync(credentials, new SmartMeApiClient.Containers.ActionToRun
                 {
-                    DeviceID = new Guid("c04db633-3c35-4e88-b9ee-11ab04ee7331"),
+                    DeviceID = new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"),
                     Actions = new List<SmartMeApiClient.Containers.ActionToRunItem>
                     {
                         new SmartMeApiClient.Containers.ActionToRunItem(HexStringHelper.ByteArrayToString(ObisCodes.SmartMeSpecificPhaseSwitchL1), 0.0)
