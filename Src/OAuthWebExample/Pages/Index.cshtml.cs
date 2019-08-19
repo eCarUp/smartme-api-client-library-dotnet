@@ -29,12 +29,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAuthWebExample.OAuth2;
 using SmartMeApiClient;
+using SmartMeApiClient.Containers;
 
 namespace OAuthWebExample.Pages
 {
     public class IndexModel : PageModel
     {
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -42,22 +43,23 @@ namespace OAuthWebExample.Pages
 
                 if (string.IsNullOrEmpty(tokenData.AccessToken))
                 {
-                    // We don't have an access token, logout
+                    // We don't have an access token, sign out
                     await HttpContext.SignOutAsync();
-                    return;
+                    return Redirect("/");
                 }
 
-                try
+                // Test if access token is still valid else sign out and reload
+                return await DevicesApi.GetDevicesAsync(tokenData.AccessToken, new ResultHandler<List<Device>>
                 {
-                    // Test if access token is still valid else sign out and reload
-                    await DevicesApi.GetDevicesAsync(tokenData.AccessToken);
-                }
-                catch(UnauthorizedAccessException)
-                {
-                    await HttpContext.SignOutAsync();
-                    Redirect("/");
-                }                
+                    OnError = (errorType, errorMessage) =>
+                    {
+                        HttpContext.SignOutAsync();
+                        return Redirect("/");
+                    }
+                });              
             }
+
+            return Page();
         }
     }
 }

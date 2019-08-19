@@ -12,7 +12,7 @@ See the Console Application Example project in [`Src/Example`](Src/Example). Set
 
 ### Web Application using OAuth2 Authentication
 
-See the Web Application Example project in [`Src/OAuthWebExample`](Src/Example). Set your username and password in [`appsettings.json`](Src/OAuthWebExample/appsettings.json). Please keep your username and password private.
+See the Web Application Example project in [`Src/OAuthWebExample`](Src/Example). Set your OAuth2 client id and secret in [`appsettings.json`](Src/OAuthWebExample/appsettings.json). Contact us to provide you with a client id and secret. Please keep your client id and secret private.
 
 ## Requirements
 
