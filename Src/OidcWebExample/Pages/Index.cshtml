@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <h2>You are <b>not authorized</b> to access the smart-me API.<br /><br />
+    Please login.</h2>
+}
+else
+{
+    <h2>You are authorized to access the smart-me API.<br /><br />
+    Have fun.</h2>
+}

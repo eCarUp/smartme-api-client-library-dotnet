@@ -9,3 +9,8 @@ Src/SmartMeApiClient/obj/
 Src/OAuthWebExample/bin/
 Src/OAuthWebExample/obj/
 *.user
+bin/
+.vscode/
+*.bak
+obj/
+Src/OidcWebExample/appsettings.Development.json
