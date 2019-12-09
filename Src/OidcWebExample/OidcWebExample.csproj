@@ -12,6 +12,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmartMeApiClient-Old\SmartMeApiClient-Old.csproj" />
+    <ProjectReference Include="..\SmartMeApiClient\SmartMeApiClient.csproj" />
   </ItemGroup>
 </Project>

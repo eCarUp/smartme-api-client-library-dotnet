@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartMeApiClient-Old", "Sma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{FDEAAC9A-C562-4D60-9EC4-8E78D409FA04}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuthWebExample-Old", "OAuthWebExample-Old\OAuthWebExample-Old.csproj", "{D34919CC-9C94-4511-A724-86273F472BAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuthWebExample", "OAuthWebExample\OAuthWebExample.csproj", "{D34919CC-9C94-4511-A724-86273F472BAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OidcWebExample-Old", "OidcWebExample-Old\OidcWebExample-Old.csproj", "{70BAAEB0-5228-43F8-8280-802D2B8D9D0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OidcWebExample", "OidcWebExample\OidcWebExample.csproj", "{70BAAEB0-5228-43F8-8280-802D2B8D9D0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartMeApiClient", "SmartMeApiClient\SmartMeApiClient.csproj", "{D71F1992-51C1-4316-8A14-293B25AB3D5F}"
 EndProject
