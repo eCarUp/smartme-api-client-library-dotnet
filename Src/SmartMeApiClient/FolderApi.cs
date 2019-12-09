@@ -23,6 +23,7 @@
 using SmartMeApiClient.Containers;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SmartMeApiClient
 {
