@@ -25,6 +25,7 @@ using SmartMeApiClient.Containers;
 using SmartMeApiClient.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,11 +35,29 @@ namespace Example
     {
         public static async Task ActionsAsync(UserPassword credentials)
         {
+            // We will use this device to fetch its details later
+            Device sampleDevice;
+            
+            // Get all devices
+            {
+                Helpers.WriteConsoleTitle("Get all devices");
+
+                List<Device> devices = await DevicesApi.GetDevicesAsync(credentials);
+
+                foreach (var device in devices)
+                {
+                    Console.WriteLine($"Id: {device.Id}, Name: {device.Name}");
+                }
+                
+                // Store the first device. Make sure you have at least one device in your smart-me account.
+                sampleDevice = devices.First();
+            }
+            
             // Get Actions
             {
                 Helpers.WriteConsoleTitle("Get Actions");
 
-                List<SmartMeApiClient.Containers.Action> actions = await ActionsApi.GetActionsAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
+                List<SmartMeApiClient.Containers.Action> actions = await ActionsApi.GetActionsAsync(credentials, sampleDevice.Id);
 
                 foreach (var action in actions)
                 {
@@ -50,12 +69,12 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Run Actions");
 
-                await ActionsApi.RunActionsAsync(credentials, new SmartMeApiClient.Containers.ActionToRun
+                await ActionsApi.RunActionsAsync(credentials, new ActionToRun
                 {
-                    DeviceID = new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"),
-                    Actions = new List<SmartMeApiClient.Containers.ActionToRunItem>
+                    DeviceID = sampleDevice.Id,
+                    Actions = new List<ActionToRunItem>
                     {
-                        new SmartMeApiClient.Containers.ActionToRunItem(HexStringHelper.ByteArrayToString(ObisCodes.SmartMeSpecificPhaseSwitchL1), 1.0)
+                        new ActionToRunItem(HexStringHelper.ByteArrayToString(ObisCodes.SmartMeSpecificPhaseSwitchL1), 1.0)
                     }
                 });
 
@@ -63,12 +82,12 @@ namespace Example
 
                 Thread.Sleep(5000);
 
-                await ActionsApi.RunActionsAsync(credentials, new SmartMeApiClient.Containers.ActionToRun
+                await ActionsApi.RunActionsAsync(credentials, new ActionToRun
                 {
-                    DeviceID = new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"),
-                    Actions = new List<SmartMeApiClient.Containers.ActionToRunItem>
+                    DeviceID = sampleDevice.Id,
+                    Actions = new List<ActionToRunItem>
                     {
-                        new SmartMeApiClient.Containers.ActionToRunItem(HexStringHelper.ByteArrayToString(ObisCodes.SmartMeSpecificPhaseSwitchL1), 0.0)
+                        new ActionToRunItem(HexStringHelper.ByteArrayToString(ObisCodes.SmartMeSpecificPhaseSwitchL1), 0.0)
                     }
                 });
 

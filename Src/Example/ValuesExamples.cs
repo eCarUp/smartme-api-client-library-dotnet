@@ -23,6 +23,8 @@
 using SmartMeApiClient;
 using SmartMeApiClient.Containers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Example
@@ -31,11 +33,29 @@ namespace Example
     {
         public static async Task ValuesAsync(UserPassword credentials)
         {
+            // We will use this device to fetch its details later
+            Device sampleDevice;
+            
+            // Get all devices
+            {
+                Helpers.WriteConsoleTitle("Get all devices");
+
+                List<Device> devices = await DevicesApi.GetDevicesAsync(credentials);
+
+                foreach (var device in devices)
+                {
+                    Console.WriteLine($"Id: {device.Id}, Name: {device.Name}");
+                }
+                
+                // Store the first device. Make sure you have at least one device in your smart-me account.
+                sampleDevice = devices.First();
+            }
+            
             // Get Values
             {
                 Helpers.WriteConsoleTitle("Get Values");
 
-                var deviceValues = await ValuesApi.GetDeviceValuesAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
+                var deviceValues = await ValuesApi.GetDeviceValuesAsync(credentials, sampleDevice.Id);
 
                 foreach (var deviceValue in deviceValues.Values)
                 {
@@ -47,7 +67,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get Values In Past");
 
-                var deviceValues = await ValuesApi.GetDeviceValuesInPastAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"), new DateTime(2019, 8, 16, 12, 0, 0, DateTimeKind.Utc));
+                var deviceValues = await ValuesApi.GetDeviceValuesInPastAsync(credentials, sampleDevice.Id, new DateTime(2019, 8, 16, 12, 0, 0, DateTimeKind.Utc));
 
                 foreach (var deviceValue in deviceValues.Values)
                 {
@@ -61,7 +81,7 @@ namespace Example
 
                 var multipleDeviceValues = await ValuesApi.GetDeviceValuesInPastMultipleAsync(
                     credentials,
-                    new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"),
+                    sampleDevice.Id,
                     new DateTime(2019, 8, 5, 10, 0, 0, DateTimeKind.Utc),
                     new DateTime(2019, 8, 5, 12, 0, 0, DateTimeKind.Utc),
                     5);
@@ -81,7 +101,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get Meter Values");
 
-                var meterValues = await ValuesApi.GetMeterValuesAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"), new DateTime(2019, 8, 5, 12, 0, 0, DateTimeKind.Utc));
+                var meterValues = await ValuesApi.GetMeterValuesAsync(credentials, sampleDevice.Id, new DateTime(2019, 8, 5, 12, 0, 0, DateTimeKind.Utc));
 
                 Console.WriteLine($"CounterReading: {meterValues.CounterReading}, CounterReadingImport: {meterValues.CounterReadingImport}");
             }
