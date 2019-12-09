@@ -2,6 +2,14 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageVersion>1.2.0</PackageVersion>
+        <Title>smart-me API client</Title>
+        <Authors>smart-me AG</Authors>
+        <Description>The smart-me API client library enables you to integrate smart-me API functionality into your .NET application. It makes HTTP requests to the smart-me REST API. All HTTP request and response bodies are mapped to .NET classes.</Description>
+        <Copyright>smart-me AG</Copyright>
+        <PackageProjectUrl>https://github.com/eCarUp/smartme-api-client-library-dotnet</PackageProjectUrl>
+        <PackageIconUrl>https://github.com/eCarUp/smartme-api-client-library-dotnet/blob/master/Doc/icons/logo.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/eCarUp/smartme-api-client-library-dotnet</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
