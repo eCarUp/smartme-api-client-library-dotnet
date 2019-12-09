@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartMeApiClient-Old", "SmartMeApiClient-Old\SmartMeApiClient-Old.csproj", "{E43941D0-D29C-451D-AF83-43FB8720F115}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example-Old", "Example-Old\Example-Old.csproj", "{FDEAAC9A-C562-4D60-9EC4-8E78D409FA04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{FDEAAC9A-C562-4D60-9EC4-8E78D409FA04}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuthWebExample-Old", "OAuthWebExample-Old\OAuthWebExample-Old.csproj", "{D34919CC-9C94-4511-A724-86273F472BAB}"
 EndProject
