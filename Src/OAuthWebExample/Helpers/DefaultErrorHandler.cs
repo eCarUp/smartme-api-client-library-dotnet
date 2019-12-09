@@ -22,10 +22,6 @@
 
 using Microsoft.AspNetCore.Mvc;
 using SmartMeApiClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OAuthWebExample.Helpers
 {
