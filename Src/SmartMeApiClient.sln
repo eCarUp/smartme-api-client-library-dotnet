@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuthWebExample-Old", "OAut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OidcWebExample-Old", "OidcWebExample-Old\OidcWebExample-Old.csproj", "{70BAAEB0-5228-43F8-8280-802D2B8D9D0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartMeApiClient", "SmartMeApiClient\SmartMeApiClient.csproj", "{D71F1992-51C1-4316-8A14-293B25AB3D5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{70BAAEB0-5228-43F8-8280-802D2B8D9D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70BAAEB0-5228-43F8-8280-802D2B8D9D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70BAAEB0-5228-43F8-8280-802D2B8D9D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D71F1992-51C1-4316-8A14-293B25AB3D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71F1992-51C1-4316-8A14-293B25AB3D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D71F1992-51C1-4316-8A14-293B25AB3D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71F1992-51C1-4316-8A14-293B25AB3D5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
