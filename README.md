@@ -16,7 +16,7 @@ See the Web Application Example project in [`Src/OAuthWebExample`](Src/OAuthWebE
 
 ### Web Application using Openid Connect Authentication of an external IdP (identity provider)
 
-See the Web Application Example project in [`Src/OidcWebExample`](Src/OidcWebExample). Set your Openid Connect client id, secret and authority in [`appsettings.json`](Src/OidcWebExample/appsettings.json). See the [`description`](Doc/Okta.md) on how to setup an external Openid Connect identity provider using Okta. See the [`smart-me wiki`](http://wiki.smart-me.com/) on how to register the external Openid Connect identity provider.
+See the Web Application Example project in [`Src/OidcWebExample`](Src/OidcWebExample). Set your Openid Connect client id, secret and authority in [`appsettings.json`](Src/OidcWebExample/appsettings.json). See the [`description`](Doc/Okta.md) on how to setup an external Openid Connect identity provider using Okta. See the [`smart-me wiki`](https://dok.smart-me.com/home) on how to register the external Openid Connect identity provider.
 
 ## Requirements
 
