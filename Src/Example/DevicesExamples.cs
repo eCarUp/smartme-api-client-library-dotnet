@@ -26,7 +26,6 @@ using SmartMeApiClient.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,6 +35,9 @@ namespace Example
     {
         public static async Task DevicesAsync(UserPassword credentials)
         {
+            // We will use this device to fetch its details later
+            Device sampleDevice;
+            
             // Get all devices
             {
                 Helpers.WriteConsoleTitle("Get all devices");
@@ -46,6 +48,10 @@ namespace Example
                 {
                     Console.WriteLine($"Id: {device.Id}, Name: {device.Name}");
                 }
+                
+                // Store the first device to show how to fetch its details in various ways. Make sure you have at least
+                // one device in your smart-me account.
+                sampleDevice = devices.First();
             }
 
             // Get all devices with a certain energy type 
@@ -83,7 +89,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get device by Id");
 
-                Device device = await DevicesApi.GetDeviceAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
+                Device device = await DevicesApi.GetDeviceAsync(credentials, sampleDevice.Id);
                 Console.WriteLine($"Name: {device.Name}, Id: {device.Id}");
             }
 
@@ -91,7 +97,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get device by serial number");
 
-                Device device = await DevicesApi.GetDeviceAsync(credentials, 200354);
+                Device device = await DevicesApi.GetDeviceAsync(credentials, sampleDevice.Serial);
                 Console.WriteLine($"Name: {device.Name}, Serial: {device.Serial}");
             }
 
@@ -99,7 +105,7 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get additional device information");
 
-                var info = await DevicesApi.GetAdditionalDeviceInformationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
+                var info = await DevicesApi.GetAdditionalDeviceInformationAsync(credentials, sampleDevice.Id);
                 Console.WriteLine($"ID: {info.ID}, HardwareVersion: {info.HardwareVersion}, FirmwareVersion: {info.FirmwareVersion}, AdditionalMeterSerialNumber: {info.AdditionalMeterSerialNumber}");
             }
 
@@ -143,21 +149,40 @@ namespace Example
 
         public static async Task DeviceConfigurationAsync(UserPassword credentials)
         {
+            // We will use this device to fetch its details later
+            Device sampleDevice;
+            
+            // Get all devices
+            {
+                Helpers.WriteConsoleTitle("Get all devices");
+
+                List<Device> devices = await DevicesApi.GetDevicesAsync(credentials);
+
+                foreach (var device in devices)
+                {
+                    Console.WriteLine($"Id: {device.Id}, Name: {device.Name}");
+                }
+                
+                // Store the first device to show fow to fetch its details in various ways. Make sure you have at least
+                // one device in your smart-me account.
+                sampleDevice = devices.First();
+            }
+            
             // Get smart-me Device Configuration
             {
                 Helpers.WriteConsoleTitle("Get smart-me device configuration");
 
-                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
+                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, sampleDevice.Id);
                 Console.WriteLine($"Id: {configuration.Id}, UploadInterval: {configuration.UploadInterval}");
             }
 
-            // Set smart-me Device Configuration
+            // Modify smart-me device configuration
             {
                 Helpers.WriteConsoleTitle("Set smart-me device configuration");
 
-                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
+                var configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, sampleDevice.Id);
 
-                configuration.SwitchConfiguration[0].CanSwitchOff = false;
+                configuration.DevicePinCode = "1234";
 
                 try
                 {
@@ -167,14 +192,12 @@ namespace Example
                 {
                     Console.WriteLine($"Error: {e.Message}");
                 }
-
-                Console.WriteLine("Device is not allowed to switch off");
-
+                
                 Thread.Sleep(5000);
 
-                configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, new Guid("00315ffa-a6b6-4538-84f5-b50b685b0e83"));
+                configuration = await DevicesApi.GetSmartMeDeviceConfigurationAsync(credentials, sampleDevice.Id);
 
-                configuration.SwitchConfiguration[0].CanSwitchOff = true;
+                configuration.DevicePinCode = "7890";
 
                 try
                 {
@@ -184,9 +207,7 @@ namespace Example
                 {
                     Console.WriteLine($"Error: {e.Message}");
                 }
-
-                Console.WriteLine("Device is allowed to switch off");
-
+                
                 Thread.Sleep(5000);
             }
         }
@@ -211,12 +232,14 @@ namespace Example
                 });
             }
 
+            CustomDevice sampleDevice;
+
             // Get Custom Devices
             {
                 Helpers.WriteConsoleTitle("Get custom devices");
 
                 List<CustomDevice> customDevices = await DevicesApi.GetCustomDevicesAsync(credentials);
-
+                
                 foreach (CustomDevice customDevice in customDevices)
                 {
                     if (customDevice != null)
@@ -224,6 +247,8 @@ namespace Example
                         Console.WriteLine($"Id: {customDevice.Id}, Name: {customDevice.Name}");
                     }
                 }
+
+                sampleDevice = customDevices.First();
             }
 
             // Update Custom Device
@@ -247,7 +272,8 @@ namespace Example
             {
                 Helpers.WriteConsoleTitle("Get custom device by id");
 
-                CustomDevice customDevice = await DevicesApi.GetCustomDeviceAsync(credentials, new Guid("{b41338ba-b2bf-4717-bacb-10a9fa278e59}"));
+                CustomDevice customDevice = await DevicesApi.GetCustomDeviceAsync(credentials, sampleDevice.Id);
+
                 Console.WriteLine($"Id: {customDevice.Id}, Name: {customDevice.Name}");
             }
         }
